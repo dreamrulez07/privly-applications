@@ -1,14 +1,14 @@
 {% extends "templates/new.html.template" %}
 
+{% block specs %}
+  <script type="text/javascript" src="../shared/test/parameters.js"></script>
+  <script type="text/javascript" src="../shared/test/extension_integration.js"></script>
+  <script type="text/javascript" src="../shared/test/network_service.js"></script>
+{% endblock %}
+
 {% block javascripts %}
   <script type="text/javascript" src="../vendor/jquery.min.js"></script>
   <script type="text/javascript" src="js/new.js"></script>
-{% endblock %}
-
-{% block specs %}
-  <script src="../shared/test/parameters.js" type="text/javascript"></script>
-  <script src="../shared/test/network_service.js" type="text/javascript"></script>
-  <script src="../shared/test/extension_integration.js" type="text/javascript"></script>
 {% endblock %}
 
 {% block form %}
