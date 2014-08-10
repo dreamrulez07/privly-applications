@@ -1,11 +1,8 @@
 {% extends "templates/new.html.template" %}
 
 {% block specs %}
-  <script type="text/javascript" src="../shared/test/privly-web/new.js"></script>
-  <script type="text/javascript" src="test/new.js"></script>
-  <script type="text/javascript" src="../shared/test/parameters.js"></script>
-  <script type="text/javascript" src="../shared/test/extension_integration.js"></script>
-  <script type="text/javascript" src="../shared/test/network_service.js"></script>
+  <meta name="PrivlySpec"
+   content="../shared/test/privly-web/new.js,test/new.js,../shared/test/parameters.js,../shared/test/extension_integration.js,../shared/test/network_service.js"/>
 {% endblock %}
 
 {% block javascripts %}

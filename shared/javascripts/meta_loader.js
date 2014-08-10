@@ -65,11 +65,10 @@ function runTests(){
     return "Failed to load spec";
   }
   var testFiles= new Array();
-//  testFiles.push("../lib/jasmine-1.3.1/jasmine.js");
-//  testFiles.push("../lib/jasmine-1.3.1/jasmine-html.js");
-//  testFiles.push("../lib/phantom-jasmine/console-runner.js");
+  testFiles.push("../vendor/jasmine/jasmine-1.3.1/jasmine.js");
+  testFiles.push("../vendor/jasmine/jasmine.console_reporter.js");
   specToLoad.split(",").forEach(function(el){testFiles.push(el);});
-//  testFiles.push("../shared/test/execute.js");
+  testFiles.push("../shared/test/execute.js");
   
   // Ensures the testing scripts are loaded in the proper order
   function timedFunction(filename) {
