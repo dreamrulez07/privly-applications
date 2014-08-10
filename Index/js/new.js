@@ -13,14 +13,7 @@
  *    Callback=loginFailure
  * 3. Pending post: The user can make the post at this point.
  *    Callback=pendingPost
- * 4. postSubmit: The user submitted the form so the content is being
- *    sent to the remote server. Once it is returned, the URL will
- *    be messaged to the extension (if present) by calling the
- *    "postCompleted" callback.
- * 5. Error creating post: The remote server would not accept the user's
- *    content. The app should display an error message.
- *    Callback=createError
- * 6. Completed post: The remote server has returned a URL. This app should
+ * 4. Completed post: The remote server has returned a URL. This app should
  *    display it and fire the URL event.
  *    Callback=postCompleted
  */
@@ -69,9 +62,10 @@ var callbacks = {
    * server's sign in endpoint is at "/users/sign_in".
    */
   loginFailure: function() {
-    var message = "You are not currently signed into your content server. " + 
-      "Please login then refresh the page.";
-    $("#messages").text(message);
+    $("#messages").hide();
+    $("#login_message").show();
+    $("#refresh_link").click(function(){location.reload(true);});
+    privlyNetworkService.showLoggedOutNav();
   },
   
   /**
@@ -84,22 +78,9 @@ var callbacks = {
     privlyNetworkService.sameOriginGetRequest(
       privlyNetworkService.contentServerDomain() + "/posts", 
       callbacks.postCompleted);
-    
-    $("#messages").text("");
-  },
-  
-  /**
-   * Submit the posting form and await the return of the post.
-   */
-  postSubmit: function() {
-    //pass
-  },
-  
-  /**
-   * Tell the user that there was a problem.
-   */
-  createError: function() {
-    $("#messages").text("There was an error fetching your posts.");
+    $("#save").prop('disabled', false);
+    $("#messages").toggle();
+    $("#form").toggle();
   },
   
   /**
@@ -255,9 +236,16 @@ var messaging = {
  * @param {message} e The message posted by an iframe. 
  */
 function resizeIframePostedMessage(e) {
-  if(e.origin == window.location.origin && 
-    document.getElementById("ifrm0") !== null) {
-    document.getElementById("ifrm0").style.height = e.data.split(",")[1] + "px";
+  var messageComponents = e.data.split(",");
+  if( e.origin !== window.location.origin ||
+    messageComponents.length < 2 ||
+    messageComponents[0] === ""
+    ) {
+    return;
+  }
+  var iframe = document.getElementById(messageComponents[0]);
+  if(iframe !== null) {
+    iframe.style.height = messageComponents[1] + "px";
   }
 }
 

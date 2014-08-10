@@ -66,26 +66,13 @@ function zeroCipher(key, message) {
  *  @return {string} readable message
  */
 function zeroDecipher(key, data) {
-    return decompress(sjcl.decrypt(key,JSON.stringify(data)));
-}
-
-/**
- * Convert URLs to clickable links.
- * URLs to handle:
- * <code>
- *     magnet:?xt.1=urn:sha1:YNCKHTQCWBTRNJIV4WNAE52SJUQCZO5C&xt.2=urn:sha1:TXGCZQTH26NL6OUQAJJPFALHG2LTGBC7
- *     http://localhost:8800/zero/?6f09182b8ea51997#WtLEUO5Epj9UHAV9JFs+6pUQZp13TuspAUjnF+iM+dM=
- *     http://user:password@localhost:8800/zero/?6f09182b8ea51997#WtLEUO5Epj9UHAV9JFs+6pUQZp13TuspAUjnF+iM+dM=
- * </code>
- *
- * @param object element : a jQuery DOM element.
- * @FIXME: add ppa & apt links.
- */
-function urls2links(element) {
-    var re = /((http|https|ftp):\/\/[\w?=&.\/-;#@~%+-]+(?![\w\s?&.\/;#~%"=-]*>))/ig;
-    element.html(element.html().replace(re,'<a href="$1" rel="nofollow">$1</a>'));
-    var re = /((magnet):[\w?=&.\/-;#@~%+-]+)/ig;
-    element.html(element.html().replace(re,'<a href="$1">$1</a>'));
+    
+    // Patch for old versions of sjcl
+    if( typeof data !== "string" ) {
+      data = JSON.stringify(data);
+    }
+    
+    return decompress(sjcl.decrypt(key,data));
 }
 
 /**
