@@ -9,14 +9,22 @@
   <title>
    New PlainPost
   </title>
-  <meta content="../shared/test/privly-web/new.js,test/new.js,../shared/test/parameters.js,../shared/test/extension_integration.js,../shared/test/network_service.js" name="PrivlySpec"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <!-- Jasmine files -->
+  <script src="../vendor/jasmine/jasmine-1.3.1/jasmine.js" type="text/javascript">
+  </script>
+  <script src="../vendor/jasmine/console-runner.js" type="text/javascript">
+  </script>
+  <script src="../shared/test/execute.js" type="text/javascript">
+  </script>
   <!-- Top Styles -->
   <link class="top" href="../vendor/bootstrap/css/bootstrap.min.css" media="screen" rel="stylesheet"/>
   <link class="top" href="../shared/css/top/top.css" rel="stylesheet"/>
   <!-- Common Styles -->
   <link href="../shared/css/common.css" media="screen" rel="stylesheet" type="text/css"/>
   <link href="../shared/css/tooltip.css" media="screen" rel="stylesheet" type="text/css"/>
+  <!-- Specific Styles -->
+  <!-- Shared JavaScripts -->
   <script src="../shared/javascripts/meta_loader.js" type="text/javascript">
   </script>
   <script src="../shared/javascripts/parameters.js" type="text/javascript">
@@ -25,6 +33,18 @@
   </script>
   <script src="../shared/javascripts/extension_integration.js" type="text/javascript">
   </script>
+  <!-- Spec files -->
+  <script src="../shared/test/privly-web/new.js" type="text/javascript">
+  </script>
+  <script src="test/new.js" type="text/javascript">
+  </script>
+  <script src="../shared/test/parameters.js" type="text/javascript">
+  </script>
+  <script src="../shared/test/extension_integration.js" type="text/javascript">
+  </script>
+  <script src="../shared/test/network_service.js" type="text/javascript">
+  </script>
+  <!-- Application Specific JavaScripts -->
   <script src="../vendor/jquery.min.js" type="text/javascript">
   </script>
   <script src="../vendor/jquery.autosize.js" type="text/javascript">
@@ -42,6 +62,28 @@
   </script>
   <!-- Wrap all page content here -->
   <div id="wrap">
+   &lt;%
+# Partial used for the common navigation among all the applications.
+#
+# The menus are compiled without knowing if the user will be logged in
+# or the nav will be shown in the injected context. This means
+# that the navigation is hidden by default to avoid a shudder in the
+# injected context, and will be shown only if
+# JavaScript choses to display it. For an example of how this
+# nav should be shown, you should look at network_service.js
+# and view the showLoggedOutNav() and showLoggedInNav() functions.
+#
+# Specifically, if you want to show the logged in nav:
+# $("logged_in_nav").hide();
+# $(".logged_out_nav").show();
+# $(".injected_hide").show();
+#
+# and similarly for the logged out nav:
+# $("logged_in_nav").show();
+# $(".logged_out_nav").hide();
+# $(".injected_hide").show();
+#
+%&gt;
    <div class="navbar navbar-inverse navbar-fixed-top injected_hide mobile_hide" role="navigation">
     <div class="container">
      <div class="navbar-header">
@@ -69,6 +111,7 @@
          </span>
         </a>
        </li>
+       &lt;% # Add the editing menus as needed %&gt;
        <li class="active dropdown logged_in_nav mobile_hide" style="display:none;">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
          New Link
@@ -79,18 +122,18 @@
          <li class="dropdown-header">
           Select Application
          </li>
-         <li>
-          <a href="../ZeroBin/new.html">
-           <span class="glyphicon glyphicon-pencil">
-           </span>
-           New ZeroBin
-          </a>
-         </li>
          <li class="active">
           <a href="../PlainPost/new.html">
            <span class="glyphicon glyphicon-pencil">
            </span>
            New PlainPost
+          </a>
+         </li>
+         <li>
+          <a href="../ZeroBin/new.html">
+           <span class="glyphicon glyphicon-pencil">
+           </span>
+           New ZeroBin
           </a>
          </li>
          <li>
