@@ -17,13 +17,13 @@
       var jasmineEnv = jasmine.getEnv();
       jasmineEnv.updateInterval = 1000;
 
-      window.htmlReporter = new jasmine.HtmlReporter();
+      // window.htmlReporter = new jasmine.HtmlReporter();
 
-      jasmineEnv.addReporter(htmlReporter);
+      // jasmineEnv.addReporter(htmlReporter);
 
-      jasmineEnv.specFilter = function(spec) {
-        return htmlReporter.specFilter(spec);
-      };
+      // jasmineEnv.specFilter = function(spec) {
+      //   return htmlReporter.specFilter(spec);
+      // };
 
       window.consoleReporter = new jasmine.ConsoleReporter();
 
